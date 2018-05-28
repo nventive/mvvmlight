@@ -2,19 +2,15 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.0;xamarinios10;MonoAndroid71;netstandard2.0</TargetFrameworks>
-    <Description>.NET Standard 1.0. A lightweight framework to implement Model-View-ViewModel applications in WPF, Windows Store, Windows Phone, Silverlight, Xamarin.</Description>
-    <Product />
+    <Description>Uno-compatible MVVMLight .NET Standard 1.0. A lightweight framework to implement Model-View-ViewModel applications in WPF, Windows Store, Windows Phone, Silverlight, Xamarin.</Description>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Company>GalaSoft Laurent Bugnion @ http://www.galasoft.ch</Company>
-    <Authors>Laurent Bugnion (GalaSoft)</Authors>
+		<Company>nventive</Company>
+    <Authors>nventive</Authors>
     <Version>5.4.0.1</Version>
 		<PackageId>Uno.GalaSoft.MvvmLight</PackageId>
-		<Copyright>Copyright © GalaSoft Laurent Bugnion 2009-2017</Copyright>
+		<Copyright>nventive</Copyright>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageLicenseUrl>https://mvvmlight.codeplex.com/license</PackageLicenseUrl>
-    <PackageProjectUrl>http://www.mvvmlight.net</PackageProjectUrl>
-    <PackageIconUrl></PackageIconUrl>
-    <RepositoryUrl>https://mvvmlight.codeplex.com</RepositoryUrl>
+    <RepositoryUrl>https://github.com/nventive/uno.mvvmlight</RepositoryUrl>
     <AssemblyName>GalaSoft.MvvmLight</AssemblyName>
     <RootNamespace>GalaSoft.MvvmLight</RootNamespace>
     <SignAssembly>true</SignAssembly>

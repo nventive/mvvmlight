@@ -18,11 +18,6 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyDescription(".NET Standard 1.0. Platform components to implement Model-View-ViewModel applications in WPF, Windows Store, Windows Phone, Silverlight and Xamarin. These are needed because of technical constraints with portable class libraries .")]
-[assembly: AssemblyCopyright("Copyright © GalaSoft Laurent Bugnion 2009-2017")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-
 #if !NETFX_CORE
 #if !XAMARIN
 #if !WINDOWS_PHONE
