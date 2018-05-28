@@ -1,0 +1,76 @@
+phases:
+- phase: Windows
+  variables:
+    NUGET_PACKAGES: $(Agent.WorkFolder)\.nuget
+    NUGET_HTTP_CACHE_PATH: $(Agent.WorkFolder)\.nuget-http-cache
+
+  steps:
+  - checkout: self
+    clean: true
+    
+  - task: GitVersion@3
+    inputs:
+      updateAssemblyInfo: false
+
+  - task: NuGetToolInstaller@0
+    inputs:
+      versionSpec: 4.7.0
+      checkLatest: false
+
+  - task: NuGetCommand@2
+    inputs:
+      command: restore
+      solution: GalaSoft.MvvmLight/GalaSoft.MvvmLight.sln
+      selectOrConfig: select
+      includeNuGetOrg: true
+      verbosityRestore: Normal
+
+  - task: MSBuild@1
+    inputs:
+      solution: GalaSoft.MvvmLight/GalaSoft.MvvmLight.sln
+      msbuildLocationMethod: version
+      msbuildVersion: latest
+      msbuildArchitecture: x86
+      msbuildArguments: /r /t:Pack "/p:Configuration=Release" "/p:PackageOutput=$(build.artifactstagingdirectory)\nuget" /detailedsummary /bl:$(build.artifactstagingdirectory)\build.binlog
+      clean: false
+      maximumCpuCount: true
+      restoreNugetPackages: false
+      logProjectEvents: false
+      createLogFile: false
+      
+  - task: VSTest@2
+    inputs:
+      testAssemblyVer2: |
+        **\*test*.dll
+        !**\obj\**
+      vstestLocationMethod: version
+      vsTestVersion: latest
+      testSelector: testAssemblies
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(build.sourcesdirectory)/Build
+      Contents: '*.nupkg'
+      TargetFolder: $(build.artifactstagingdirectory)\vslatest
+      CleanTargetFolder: false
+      OverWrite: false
+      flattenFolders: false
+
+  - task: PublishBuildArtifacts@1
+    condition: always()
+    inputs:
+      PathtoPublish: $(build.artifactstagingdirectory)
+      ArtifactName: drop
+      ArtifactType: Container
+
+  - task: PublishSymbols@2
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    inputs:
+      SymbolsFolder:
+      SearchPattern: '**/bin/**/*.pdb'
+      IndexSources: true
+      PublishSymbol: true
+      SymbolServerType: TeamServices
+      DetailedLog: false
+      TreatNotIndexedAsWarning: false
+      SymbolsArtifactName: Symbols_$(BuildConfiguration)
