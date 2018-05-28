@@ -295,6 +295,10 @@
       <Project>{9e33963e-fc19-4ccb-a4f2-b0aecd8a092f}</Project>
       <Name>GalaSoft.MvvmLight</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\GalaSoft.MvvmLight.Platform\GalaSoft.MvvmLight.Platform.csproj">
+      <Project>{c7b99322-9663-495c-a3b0-fd886a6f6730}</Project>
+      <Name>GalaSoft.MvvmLight.Platform</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Choose>

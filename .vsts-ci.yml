@@ -31,7 +31,7 @@ phases:
       msbuildLocationMethod: version
       msbuildVersion: latest
       msbuildArchitecture: x86
-      msbuildArguments: /r /t:Pack "/p:Configuration=Release" "/p:PackageOutput=$(build.artifactstagingdirectory)\nuget" /detailedsummary /bl:$(build.artifactstagingdirectory)\build.binlog
+      msbuildArguments: /r /p:Configuration=Release "/p:PackageOutput=$(build.artifactstagingdirectory)\nuget" /detailedsummary /bl:$(build.artifactstagingdirectory)\build.binlog
       clean: false
       maximumCpuCount: true
       restoreNugetPackages: false

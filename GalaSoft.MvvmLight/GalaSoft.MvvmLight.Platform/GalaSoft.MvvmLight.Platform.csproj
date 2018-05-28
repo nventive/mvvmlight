@@ -19,6 +19,7 @@
 		<Product />
 		<Company>GalaSoft Laurent Bugnion @ http://www.galasoft.ch</Company>
 		<Authors>Laurent Bugnion (GalaSoft)</Authors>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -64,9 +65,6 @@
 		<None Include="..\GalaSoft.MvvmLight.Platform %28UWP%29\Views\NavigationService.cs">
 			<Link>Views\NavigationService.cs</Link>
 		</None>
-		<None Include="..\GalaSoft.MvvmLight.Platform %28NET45%29\Threading\DispatcherHelper.cs">
-			<Link>Threading\DispatcherHelper.cs</Link>
-		</None>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='net45'">
@@ -79,9 +77,6 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'!='net45'">
-		<Compile Include="..\GalaSoft.MvvmLight.Platform %28NET45%29\Threading\DispatcherHelper.cs">
-			<Link>Threading\DispatcherHelper.cs</Link>
-		</Compile>
 		<Compile Include="..\GalaSoft.MvvmLight.Platform %28UWP%29\Views\DialogService.cs">
 			<Link>Views\DialogService.cs</Link>
 		</Compile>
@@ -91,6 +86,9 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+		<Compile Include="..\GalaSoft.MvvmLight.Platform %28NET45%29\Threading\DispatcherHelper.cs">
+			<Link>Threading\DispatcherHelper.cs</Link>
+		</Compile>
 		<Compile Include="..\GalaSoft.MvvmLight.Platform %28NET45Std%29\Properties\AssemblyInfo.cs">
 			<Link>Properties\AssemblyInfo.cs</Link>
 		</Compile>
