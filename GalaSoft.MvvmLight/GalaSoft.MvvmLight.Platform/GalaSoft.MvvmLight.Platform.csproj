@@ -11,6 +11,14 @@
 		<AssemblyName>GalaSoft.MvvmLight.Platform</AssemblyName>
 		<RootNamespace>GalaSoft.MvvmLight.Platform</RootNamespace>
 		<PackageId>Uno.GalaSoft.MvvmLight.Platform</PackageId>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<PackageLicenseUrl>https://mvvmlight.codeplex.com/license</PackageLicenseUrl>
+		<PackageProjectUrl>http://www.mvvmlight.net</PackageProjectUrl>
+		<PackageIconUrl></PackageIconUrl>
+		<RepositoryUrl>https://mvvmlight.codeplex.com</RepositoryUrl>
+		<Product />
+		<Company>GalaSoft Laurent Bugnion @ http://www.galasoft.ch</Company>
+		<Authors>Laurent Bugnion (GalaSoft)</Authors>
 	</PropertyGroup>
 
 	<ItemGroup>

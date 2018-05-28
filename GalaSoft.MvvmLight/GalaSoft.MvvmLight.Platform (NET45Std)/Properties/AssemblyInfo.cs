@@ -18,11 +18,7 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("GalaSoft.MvvmLight.Platform")]
 [assembly: AssemblyDescription(".NET Standard 1.0. Platform components to implement Model-View-ViewModel applications in WPF, Windows Store, Windows Phone, Silverlight and Xamarin. These are needed because of technical constraints with portable class libraries .")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GalaSoft Laurent Bugnion @ http://www.galasoft.ch")]
-[assembly: AssemblyProduct("GalaSoft.MvvmLight.Platform")]
 [assembly: AssemblyCopyright("Copyright © GalaSoft Laurent Bugnion 2009-2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -36,8 +32,8 @@ using System.Runtime.InteropServices;
 #endif
 
 [assembly: ComVisible(false)]
-[assembly: CLSCompliant(true)]
 [assembly: NeutralResourcesLanguage("en-US")]
 
-// BL0035
-[assembly: AssemblyVersion("5.4.0.1")]
+#if NET46
+[assembly: CLSCompliant(true)]
+#endif
