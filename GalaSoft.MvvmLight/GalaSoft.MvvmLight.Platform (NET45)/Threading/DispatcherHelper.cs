@@ -16,7 +16,7 @@
 using System;
 using System.Text;
 
-#if NETFX_CORE
+#if NETFX_CORE || HAS_UNO
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.Foundation;
@@ -43,15 +43,15 @@ namespace GalaSoft.MvvmLight.Threading
     ////  Email = "laurent@galasoft.ch")]
     public static class DispatcherHelper
     {
-        /// <summary>
-        /// Gets a reference to the UI thread's dispatcher, after the
-        /// <see cref="Initialize" /> method has been called on the UI thread.
-        /// </summary>
-        // ReSharper disable InconsistentNaming
-#if NETFX_CORE
-        public static CoreDispatcher UIDispatcher
+		/// <summary>
+		/// Gets a reference to the UI thread's dispatcher, after the
+		/// <see cref="Initialize" /> method has been called on the UI thread.
+		/// </summary>
+		// ReSharper disable InconsistentNaming
+#if NETFX_CORE || HAS_UNO
+		public static CoreDispatcher UIDispatcher
 #else
-        public static Dispatcher UIDispatcher
+		public static Dispatcher UIDispatcher
 #endif
         // ReSharper restore InconsistentNaming
         {
@@ -81,20 +81,20 @@ namespace GalaSoft.MvvmLight.Threading
 
             CheckDispatcher();
 
-#if NETFX_CORE
-            if (UIDispatcher.HasThreadAccess)
+#if NETFX_CORE || HAS_UNO
+			if (UIDispatcher.HasThreadAccess)
 #else
-            if (UIDispatcher.CheckAccess())
+			if (UIDispatcher.CheckAccess())
 #endif
             {
                 action();
             }
             else
             {
-#if NETFX_CORE
-                UIDispatcher.RunAsync(CoreDispatcherPriority.Normal,  () => action());
+#if NETFX_CORE || HAS_UNO
+				UIDispatcher.RunAsync(CoreDispatcherPriority.Normal,  () => action());
 #else
-                UIDispatcher.BeginInvoke(action);
+				UIDispatcher.BeginInvoke(action);
 #endif
             }
         }
@@ -112,10 +112,10 @@ namespace GalaSoft.MvvmLight.Threading
 #else
                 error.Append("Call DispatcherHelper.Initialize() in Application_Startup (App.xaml.cs).");
 #endif
-#elif NETFX_CORE
-                error.Append("Call DispatcherHelper.Initialize() at the end of App.OnLaunched.");
+#elif NETFX_CORE || HAS_UNO
+				error.Append("Call DispatcherHelper.Initialize() at the end of App.OnLaunched.");
 #else
-                error.Append("Call DispatcherHelper.Initialize() in the static App constructor.");
+				error.Append("Call DispatcherHelper.Initialize() in the static App constructor.");
 #endif
 
                 throw new InvalidOperationException(error.ToString());
@@ -123,28 +123,35 @@ namespace GalaSoft.MvvmLight.Threading
         }
 
 #if NETFX_CORE
-        /// <summary>
-        /// Invokes an action asynchronously on the UI thread.
-        /// </summary>
-        /// <param name="action">The action that must be executed.</param>
-        /// <returns>The object that provides handlers for the completed async event dispatch.</returns>
-        public static IAsyncAction RunAsync(Action action)
+		/// <summary>
+		/// Invokes an action asynchronously on the UI thread.
+		/// </summary>
+		/// <param name="action">The action that must be executed.</param>
+		/// <returns>The object that provides handlers for the completed async event dispatch.</returns>
+		public static IAsyncAction RunAsync(Action action)
+#elif HAS_UNO
+		/// <summary>
+		/// Invokes an action asynchronously on the UI thread.
+		/// </summary>
+		/// <param name="action">The action that must be executed.</param>
+		/// <returns>The object that provides handlers for the completed async event dispatch.</returns>
+		public static UIAsyncOperation RunAsync(Action action)
 #else
-        /// <summary>
-        /// Invokes an action asynchronously on the UI thread.
-        /// </summary>
-        /// <param name="action">The action that must be executed.</param>
-        /// <returns>An object, which is returned immediately after BeginInvoke is called, that can be used to interact
-        ///  with the delegate as it is pending execution in the event queue.</returns>
-        public static DispatcherOperation RunAsync(Action action)
+		/// <summary>
+		/// Invokes an action asynchronously on the UI thread.
+		/// </summary>
+		/// <param name="action">The action that must be executed.</param>
+		/// <returns>An object, which is returned immediately after BeginInvoke is called, that can be used to interact
+		///  with the delegate as it is pending execution in the event queue.</returns>
+		public static DispatcherOperation RunAsync(Action action)
 #endif
-        {
-            CheckDispatcher();
+		{
+			CheckDispatcher();
 
-#if NETFX_CORE
-            return UIDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => action());
+#if NETFX_CORE || HAS_UNO
+			return UIDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => action());
 #else
-            return UIDispatcher.BeginInvoke(action);
+			return UIDispatcher.BeginInvoke(action);
 #endif
         }
 
@@ -160,10 +167,10 @@ namespace GalaSoft.MvvmLight.Threading
 #if SILVERLIGHT
             if (UIDispatcher != null)
 #else
-#if NETFX_CORE
-            if (UIDispatcher != null)
+#if NETFX_CORE || HAS_UNO
+			if (UIDispatcher != null)
 #else
-            if (UIDispatcher != null
+			if (UIDispatcher != null
                 && UIDispatcher.Thread.IsAlive)
 #endif
 #endif
@@ -171,13 +178,13 @@ namespace GalaSoft.MvvmLight.Threading
                 return;
             }
 
-#if NETFX_CORE
-            UIDispatcher = Window.Current.Dispatcher;
+#if NETFX_CORE || HAS_UNO
+			UIDispatcher = Window.Current.Dispatcher;
 #else
 #if SILVERLIGHT
             UIDispatcher = Deployment.Current.Dispatcher;
 #else
-            UIDispatcher = Dispatcher.CurrentDispatcher;
+			UIDispatcher = Dispatcher.CurrentDispatcher;
 #endif
 #endif
         }

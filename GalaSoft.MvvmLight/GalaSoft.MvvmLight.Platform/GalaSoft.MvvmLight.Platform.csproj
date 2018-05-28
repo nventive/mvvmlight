@@ -1,0 +1,95 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+
+	<PropertyGroup>
+		<TargetFrameworks>uap10.0;xamarinios10;MonoAndroid71;netstandard2.0;net45</TargetFrameworks>
+		<NoWarn>$(NoWarn);4014;NU1701;NU1603</NoWarn>
+		<BuildForLiveUnitTesting>false</BuildForLiveUnitTesting>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+		<TreatSpecificWarningsAsErrors />
+		<DebugType>full</DebugType>
+		<DebugSymbols>True</DebugSymbols>
+		<AssemblyName>GalaSoft.MvvmLight.Platform</AssemblyName>
+		<RootNamespace>GalaSoft.MvvmLight.Platform</RootNamespace>
+		<PackageId>Uno.GalaSoft.MvvmLight.Platform</PackageId>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MSBuild.Sdk.Extras" Version="1.2.1" PrivateAssets="All" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0' ">
+		<PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform " Version="5.4.0" />
+		<EmbeddedResource Include="Properties\GalaSoft.MvvmLight.Platform.rd.xml" />
+	</ItemGroup>
+	
+	<ItemGroup Condition=" '$(TargetFramework)' == 'xamarinios10' or '$(TargetFramework)' == 'MonoAndroid71' or '$(TargetFramework)' == 'netstandard2.0' ">
+		<PackageReference Include="Uno.UI " Version="1.31.0-dev.8" />
+	</ItemGroup>
+
+	<Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+
+	<PropertyGroup Condition="'$(TargetFramework)' == 'uap10.0'">
+		<DefineConstants>$(DefineConstants);NETFX_CORE;WINDOWS_UWP;HAS_DICT_GETVALUEORDEFAULT</DefineConstants>
+	</PropertyGroup>
+	
+	<PropertyGroup Condition="'$(TargetFramework)' == 'xamarinios10' or '$(TargetFramework)' == 'MonoAndroid71' or '$(TargetFramework)' == 'netstandard2.0'">
+		<DefineConstants>$(DefineConstants);XAMARIN</DefineConstants>
+	</PropertyGroup>
+	
+	<ItemGroup Condition="'$(TargetFramework)'=='net45'">
+		<Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>..\External\NET45\System.Windows.Interactivity.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	
+	<ItemGroup>
+		<None Include="..\GalaSoft.MvvmLight.Platform %28NET45%29\Command\EventToCommand.cs">
+			<Link>Command\EventToCommand.cs</Link>
+		</None>
+		<None Include="..\GalaSoft.MvvmLight.Platform %28NET45%29\Command\IEventArgsConverter.cs">
+			<Link>Command\IEventArgsConverter.cs</Link>
+		</None>
+		<None Include="..\GalaSoft.MvvmLight.Platform %28UWP%29\Views\DialogService.cs">
+			<Link>Views\DialogService.cs</Link>
+		</None>
+		<None Include="..\GalaSoft.MvvmLight.Platform %28UWP%29\Views\NavigationService.cs">
+			<Link>Views\NavigationService.cs</Link>
+		</None>
+		<None Include="..\GalaSoft.MvvmLight.Platform %28NET45%29\Threading\DispatcherHelper.cs">
+			<Link>Threading\DispatcherHelper.cs</Link>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)'=='net45'">
+		<Compile Include="..\GalaSoft.MvvmLight.Platform %28NET45%29\Command\EventToCommand.cs">
+			<Link>Command\EventToCommand.cs</Link>
+		</Compile>
+		<Compile Include="..\GalaSoft.MvvmLight.Platform %28NET45%29\Command\IEventArgsConverter.cs">
+			<Link>Command\IEventArgsConverter.cs</Link>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)'!='net45'">
+		<Compile Include="..\GalaSoft.MvvmLight.Platform %28NET45%29\Threading\DispatcherHelper.cs">
+			<Link>Threading\DispatcherHelper.cs</Link>
+		</Compile>
+		<Compile Include="..\GalaSoft.MvvmLight.Platform %28UWP%29\Views\DialogService.cs">
+			<Link>Views\DialogService.cs</Link>
+		</Compile>
+		<Compile Include="..\GalaSoft.MvvmLight.Platform %28UWP%29\Views\NavigationService.cs">
+			<Link>Views\NavigationService.cs</Link>
+		</Compile>
+	</ItemGroup>
+	
+	<ItemGroup>
+		<Compile Include="..\GalaSoft.MvvmLight.Platform %28NET45Std%29\Properties\AssemblyInfo.cs">
+			<Link>Properties\AssemblyInfo.cs</Link>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\GalaSoft.MvvmLight (STD10)\GalaSoft.MvvmLight.csproj" />
+	</ItemGroup>
+
+</Project>

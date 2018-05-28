@@ -1,14 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
+    <TargetFrameworks>netstandard1.0;xamarinios10;MonoAndroid71;netstandard2.0</TargetFrameworks>
     <Description>.NET Standard 1.0. A lightweight framework to implement Model-View-ViewModel applications in WPF, Windows Store, Windows Phone, Silverlight, Xamarin.</Description>
     <Product />
     <Company>GalaSoft Laurent Bugnion @ http://www.galasoft.ch</Company>
     <Authors>Laurent Bugnion (GalaSoft)</Authors>
     <Version>5.4.0.1</Version>
-    <PackageId>MvvmLightLibsStd10-alpha</PackageId>
-    <Copyright>Copyright © GalaSoft Laurent Bugnion 2009-2017</Copyright>
+		<PackageId>Uno.GalaSoft.MvvmLight</PackageId>
+		<Copyright>Copyright © GalaSoft Laurent Bugnion 2009-2017</Copyright>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseUrl>https://mvvmlight.codeplex.com/license</PackageLicenseUrl>
@@ -32,8 +32,20 @@
     <DefineConstants>TRACE;RELEASE;NETFX_CORE;CMNATTR;PORTABLE;NETSTANDARD1_0</DefineConstants>
     <DocumentationFile>bin\Release\netstandard1.0\GalaSoft.MvvmLight.xml</DocumentationFile>
   </PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="MSBuild.Sdk.Extras" Version="1.2.1" PrivateAssets="All" />
+	</ItemGroup>
+	
+	<ItemGroup Condition=" '$(TargetFramework)' == 'xamarinios10' ">
+		<PackageReference Include="Uno.UI " Version="1.31.0-dev.8" />
+	</ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid71' ">
+		<PackageReference Include="Uno.UI " Version="1.31.0-dev.8" />
+	</ItemGroup>
+
+	<ItemGroup>
     <Compile Include="..\GalaSoft.MvvmLight (PCL)\Command\RelayCommand.cs" />
     <Compile Include="..\GalaSoft.MvvmLight (PCL)\Command\RelayCommandGeneric.cs" />
     <Compile Include="..\GalaSoft.MvvmLight (PCL)\Helpers\DesignerPlatformLibrary.cs" />
@@ -114,5 +126,7 @@
   <ItemGroup>
     <Content Update="..\GalaSoft.MvvmLight %28PCL%29\License.txt" Link="License.txt" />
   </ItemGroup>
+
+	<Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
 
 </Project>
