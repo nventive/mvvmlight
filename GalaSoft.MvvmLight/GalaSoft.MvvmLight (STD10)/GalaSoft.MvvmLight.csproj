@@ -10,7 +10,6 @@
     <Version>5.4.0.1</Version>
 		<PackageId>Uno.GalaSoft.MvvmLight</PackageId>
 		<Copyright>Copyright © GalaSoft Laurent Bugnion 2009-2017</Copyright>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseUrl>https://mvvmlight.codeplex.com/license</PackageLicenseUrl>
     <PackageProjectUrl>http://www.mvvmlight.net</PackageProjectUrl>
