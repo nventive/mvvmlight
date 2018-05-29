@@ -2,7 +2,8 @@
 
 This port allows for [Uno-based apps](http://platform.uno) to use the MVVM Light Toolkit on Windows, iOS, Android and WebAssembly.
 
-The [Uno.GalaSoft.MvvmLight.Platform](https://www.nuget.org/packages/Uno.GalaSoft.MvvmLight.Platform/) and [Uno.GalaSoft.MvvmLight](https://www.nuget.org/packages/Uno.GalaSoft.MvvmLight/) Nuget packages is available.
+The [Uno.GalaSoft.MvvmLight.Platform](https://www.nuget.org/packages/Uno.GalaSoft.MvvmLight.Platform/) and 
+[Uno.GalaSoft.MvvmLight](https://www.nuget.org/packages/Uno.GalaSoft.MvvmLight/) Nuget packages are available.
 
 # MVVM Light Toolkit
 
