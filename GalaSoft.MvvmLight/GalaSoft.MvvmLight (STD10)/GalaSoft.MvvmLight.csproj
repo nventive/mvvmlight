@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.0;xamarinios10;MonoAndroid71;netstandard2.0</TargetFrameworks>
-    <Description>Uno-compatible MVVMLight .NET Standard 1.0. A lightweight framework to implement Model-View-ViewModel applications in WPF, Windows Store, Windows Phone, Silverlight, Xamarin.</Description>
+    <TargetFrameworks>netstandard1.0;netstandard2.0;xamarinios10;MonoAndroid90;monoandroid10.0;xamarinmac20;uap10.0.17763</TargetFrameworks>
+    <Description>Uno-compatible MVVMLight .NET Standard 2.0. A lightweight framework to implement Model-View-ViewModel applications in WPF, Windows Store, Windows Phone, Silverlight, Xamarin.</Description>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<Company>nventive</Company>
     <Authors>nventive</Authors>
@@ -29,17 +29,10 @@
     <DocumentationFile>bin\Release\netstandard1.0\GalaSoft.MvvmLight.xml</DocumentationFile>
   </PropertyGroup>
 	
-	<ItemGroup>
-		<PackageReference Include="MSBuild.Sdk.Extras" Version="1.2.1" PrivateAssets="All" />
-	</ItemGroup>
-	
-	<ItemGroup Condition=" '$(TargetFramework)' == 'xamarinios10' ">
-		<PackageReference Include="Uno.UI " Version="1.31.0-dev.8" />
-	</ItemGroup>
 
-	<ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid71' ">
-		<PackageReference Include="Uno.UI " Version="1.31.0-dev.8" />
-	</ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='MonoAndroid90' or '$(TargetFramework)'=='monoandroid10.0' or '$(TargetFramework)'=='netstandard2.0' or '$(TargetFramework)'=='xamarinmac20'">
+        <PackageReference Include="Uno.UI " Version="3.0.0-dev.1253" />        
+    </ItemGroup>
 
 	<ItemGroup>
     <Compile Include="..\GalaSoft.MvvmLight (PCL)\Command\RelayCommand.cs" />
@@ -122,7 +115,5 @@
   <ItemGroup>
     <Content Update="..\GalaSoft.MvvmLight %28PCL%29\License.txt" Link="License.txt" />
   </ItemGroup>
-
-	<Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
 
 </Project>
